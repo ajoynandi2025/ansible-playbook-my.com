@@ -1,0 +1,16 @@
+---
+- name: Uninstall Apache (httpd)
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Stop httpd service if running
+      service:
+        name: httpd
+        state: stopped
+      ignore_errors: yes
+
+    - name: Remove httpd package
+      yum:
+        name: httpd
+        state: absent
